@@ -2,9 +2,12 @@ import os
 
 FEATURE_FLAGS = {
     "ENABLE_TEMPLATE_PROCESSING": True,
+    "EMBEDDED_SUPERSET": True
 }
 
 ENABLE_PROXY_FIX = True
+
+PUBLIC_ROLE_LIKE = "Gamma"
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
