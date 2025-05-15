@@ -9,6 +9,7 @@ FEATURE_FLAGS = {
 ENABLE_PROXY_FIX = True
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
+GUEST_TOKEN_JWT_SECRET = os.environ.get("SECRET_KEY")
 
 SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE")
 
