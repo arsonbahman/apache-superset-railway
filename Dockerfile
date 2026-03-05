@@ -10,7 +10,11 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-RUN /app/.venv/bin/python -m pip install mysqlclient psycopg2-binary
+# Find and use the correct pip in the venv, or fallback to system pip
+RUN if [ -f /app/.venv/bin/pip ]; then /app/.venv/bin/pip install psycopg2-binary mysqlclient; \
+    elif [ -f /app/.venv/bin/python ]; then /app/.venv/bin/python -m pip install psycopg2-binary mysqlclient; \
+    else pip install psycopg2-binary mysqlclient && cp -r /usr/local/lib/python3.*/dist-packages/psycopg2* /app/.venv/lib/python3.*/site-packages/ 2>/dev/null || true; \
+    fi
 
 ENV ADMIN_USERNAME $ADMIN_USERNAME
 ENV ADMIN_EMAIL $ADMIN_EMAIL
