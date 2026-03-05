@@ -6,10 +6,11 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     libmariadb-dev \
     default-libmysqlclient-dev \
+    libpq-dev \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install mysqlclient psycopg2
+RUN pip install mysqlclient psycopg2-binary
 
 ENV ADMIN_USERNAME $ADMIN_USERNAME
 ENV ADMIN_EMAIL $ADMIN_EMAIL
